@@ -6,12 +6,12 @@ class CommentsController < ApplicationController
     comment.save
     redirect_to item_path(item)
   end
-  
+
   def destroy
     Comment.find_by(id: params[:id]).destroy
     redirect_to item_path(params[:item_id])
   end
-  
+
   private
 
   def comment_params
