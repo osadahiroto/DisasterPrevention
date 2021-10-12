@@ -1,0 +1,10 @@
+<% if @range == "User" %>
+    <% @users.each do |user| %>
+        <%= user.name %>
+    <% end %>
+<% else %>
+    <% @items.each do |item| %>
+        <%= item.title %>
+        <%= item.body %>
+    <% end %>
+<% end %>
