@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
- 
+
 # フォロー機能
   def follow(user_id)
     relationships.create(followed_id: user_id)
@@ -24,7 +24,7 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-  
+
   # 検索機能
   def self.looks(searches, words)
     if searches == "perfect_match"

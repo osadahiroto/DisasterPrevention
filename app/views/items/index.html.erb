@@ -1,13 +1,50 @@
-<% @items.each do |item| %>
-<div>
-  <%= link_to item_path(item.id) do %>
-   <%= attachment_image_tag item, :image %>
+<div class="container">
+  <div class="row">
+<%= render 'items/list', user: current_user,item: @item  %>
+
+
+<div class="col-md-8 offset-md-1">
+  <h2>投稿一覧</h2>
+  <table class="table table-hover table-inverse">
+  <thead>
+  <tr>
+  <th></th>
+  <th>Title</th>
+  <th>Opinion</th>
+  <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+  <tr>
+    <td><%= link_to (attachment_image_tag item.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size: "40x40"), user_path(item.user_id) %></td>
+    <td><%= link_to (item.title), item_path(item.id) %></td>
+    <td><%= item.body %></td>
+    <td>
+      <% if user_signed_in? %>
+      <% if item.favorited_by?(current_user) %>
+    <p>
+      <%= link_to item_favorites_path(item), method: :delete, class: "like" do %>
+        ♥<%= item.favorites.count %>
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to item_favorites_path(item), method: :post do %>
+        ♥<%= item.favorites.count %>
+      <% end %>
+    </p>
   <% end %>
-  <p>投稿ユーザー画像：<%= attachment_image_tag item.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
-  <p>タイトル：<%= item.title %></p>
-  <p>説明：<%= item.body %></p>
-  <p>ユーザーネーム：<%= item.user.name %></p>
-  <p><%= link_to "#{item.comments.count} コメント", item_path(item.id) %></p>
+    </td>
+    <td>コメント数：<%= item.comments.count %></td>
+  </tr>
+ <% end %>
+ <% end %>
+  </tbody>
+  </table>
 </div>
-<% end %>
+</div>
+</div>
+</div>
 <%= paginate @items %>

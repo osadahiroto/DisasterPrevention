@@ -17,13 +17,27 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @comment = Comment.new
+    @user = @item.user
   end
 
   def edit
+    @item = Item.find(params[:id])
+    @user = @item.user
+    if @user.id == current_user.id
 
+    else
+    redirect_to items_path
+    end
   end
 
   def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+    flash[:notice]= 'You have updated book successfully.'
+    redirect_to item_path(@item.id)
+    else
+    render :edit
+    end
   end
 
   def destroy

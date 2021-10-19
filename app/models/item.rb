@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
-  
+
   # 検索機能
   def self.looks(searches, words)
     if searches == "perfect_match"
@@ -17,5 +17,5 @@ class Item < ApplicationRecord
       @item = Item.where("title LIKE ?", "%#{words}%")
     end
   end
-  
+
 end
