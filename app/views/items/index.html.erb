@@ -1,50 +1,51 @@
 <div class="container">
   <div class="row">
-<%= render 'items/list', user: current_user,item: @item  %>
+    <%= render 'items/list', user: current_user,item: @item  %>
 
 
-<div class="col-md-8 offset-md-1">
-  <h2>投稿一覧</h2>
-  <table class="table table-hover table-inverse">
-  <thead>
-  <tr>
-  <th></th>
-  <th>Title</th>
-  <th>Opinion</th>
-  <th colspan="3"></th>
-  </tr>
-  </thead>
-
-  <tbody>
-    <% @items.each do |item| %>
-  <tr>
-    <td><%= link_to (attachment_image_tag item.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size: "40x40"), user_path(item.user_id) %></td>
-    <td><%= link_to (item.title), item_path(item.id) %></td>
-    <td><%= item.body %></td>
-    <td>
-      <% if user_signed_in? %>
-      <% if item.favorited_by?(current_user) %>
-    <p>
-      <%= link_to item_favorites_path(item), method: :delete, class: "like" do %>
-        ♥<%= item.favorites.count %>
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to item_favorites_path(item), method: :post do %>
-        ♥<%= item.favorites.count %>
-      <% end %>
-    </p>
-  <% end %>
-    </td>
-    <td>コメント数：<%= item.comments.count %></td>
-  </tr>
- <% end %>
- <% end %>
-  </tbody>
-  </table>
-</div>
-</div>
-</div>
+    <div class="col-md-8 offset-md-1">
+      <h2>投稿一覧</h2>
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+          <th></th>
+          <th>Title</th>
+          <th>Opinion</th>
+          <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td><%= link_to (attachment_image_tag item.user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size: "40x40"), user_path(item.user_id) %></td>
+              <td><%= link_to (item.title), item_path(item.id) %></td>
+              <td><%= item.body %></td>
+              <td>
+                <% if user_signed_in? %>
+                <% if item.user.id != current_user.id %>
+                <% if item.favorited_by?(current_user) %>
+              <p>
+                <%= link_to item_favorites_path(item), method: :delete, class: "like" do %>
+                  ♥<%= item.favorites.count %>
+                <% end %>
+              </p>
+              <% else %>
+              <p>
+                <%= link_to item_favorites_path(item), method: :post do %>
+                  ♥<%= item.favorites.count %>
+                <% end %>
+              </p>
+            <% end %>
+            <% end %>
+              </td>
+              <td>コメント数：<%= item.comments.count %></td>
+            </tr>
+          <% end %>
+         <% end %>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
 </div>
 <%= paginate @items %>

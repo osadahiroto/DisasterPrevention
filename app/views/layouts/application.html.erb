@@ -54,13 +54,24 @@
                   <%= f.text_field :word %>
                   <%= f.submit "検索" %>
                  <% end %>
-
-
             </ul>
           </div>
         </div>
       </nav>
     </header>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <%= image_tag('susi1027491_TP_V4.jpg', size: "300x200") %>
+        </div>
+        <div class="col-lg-4">
+          <%= image_tag('hikkosi413109_TP_V4.jpg', size: "300x200") %>
+        </div>
+        <div class="col-lg-4">
+          <%= image_tag('26NJ_massironahijyouguti_TP_V4.jpg', size: "300x200") %>
+        </div>
+      </div>
+    </div>
     <main class="mb-auto">
     <%= yield %>
     </main>
