@@ -14,3 +14,27 @@
  *= require_self
  */
  @import "bootstrap";
+ 
+ .susi {
+   background-image: image-url("susi1027491_TP_V4.jpg");
+   width: 300px;
+   height: 200px;
+   background-size: cover;
+   background-position: center;
+ }
+ 
+ .hikkosi {
+   background-image: image-url("hikkosi413109_TP_V4.jpg");
+   width: 300px;
+   height: 200px;
+   background-size: cover;
+   background-position: center;
+ }
+ 
+ .massironahijyouguti {
+   background-image: image-url("26NJ_massironahijyouguti_TP_V4.jpg");
+   width: 300px;
+   height: 200px;
+   background-size: cover;
+   background-position: center;
+ }
