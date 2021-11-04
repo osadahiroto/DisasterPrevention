@@ -5,6 +5,10 @@
   <h2>投稿詳細</h2>
 <div>
   <%= attachment_image_tag @item, :image, :fill, 300,200, fallback: "no_image.jpg" %>
+  <div><% @item.tags.each do |tag| %>
+    <span class="label"><%= tag.name %></span>
+  <% end %>
+  </div>
   <p>タイトル：<%= @item.title %></p>
   <p>説明：<%= @item.body %></p>
   <p>ユーザーネーム：<%= @item.user.name %></p>

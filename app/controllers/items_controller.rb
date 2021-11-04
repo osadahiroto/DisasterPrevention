@@ -7,6 +7,10 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.user_id = current_user.id
     if @item.save
+      tags = Vision.get_image_data(@item.image)    
+      tags.each do |tag|
+        @item.tags.create(name: tag)
+    end
       redirect_to items_path
     else
       render :new
